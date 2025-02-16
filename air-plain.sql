@@ -128,7 +128,7 @@ SELECT
 FROM Pilots
     LEFT JOIN Vols
     ON Pilots.Pilote_ID = Vols.Pilote_ID
-    WHERE Vols.Vol_Identification IS NOT NULL;
+    WHERE Vols.Vol_Identification IS NULL;
 
 SELECT
     Pilots.Pilote_Nom, 
