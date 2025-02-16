@@ -83,6 +83,14 @@ WHERE Avion_Capacite > (
 ALTER TABLE Vols 
 ADD COLUMN Vol_Identification VARCHAR(255) not null;
 
+INSERT INTO Pilots (Pilote_Nom, Pilote_Adresse) 
+VALUES 
+('John Smith', '123 Avenue des Champs-Élysées, Paris'),
+('Michael Johnson', '456 Broadway, New York'),
+('Ahmed Hassan', '789 Sheikh Zayed Road, Dubai'),
+('Hans Müller', '321 Friedrichstraße, Berlin'),
+('Takeshi Yamamoto', '654 Shibuya Street, Tokyo');
+
 INSERT INTO Vols (Ville_Depart, Ville_Arrive, Heur_Depart, Heur_Arrive, Pilote_ID, Avion_ID, Vol_Identification)
 VALUES 
 ('Paris', 'London', '2025-02-16 08:00:00', '2025-02-16 09:30:00', 1, 1, 'IT100'),
