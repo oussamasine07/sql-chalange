@@ -82,3 +82,52 @@ WHERE Avion_Capacite > (
 
 ALTER TABLE Vols 
 ADD COLUMN Vol_Identification VARCHAR(255) not null;
+
+INSERT INTO Vols (Ville_Depart, Ville_Arrive, Heur_Depart, Heur_Arrive, Pilote_ID, Avion_ID, Vol_Identification)
+VALUES 
+('Paris', 'London', '2025-02-16 08:00:00', '2025-02-16 09:30:00', 1, 1, 'IT100'),
+('New York', 'Toronto', '2025-02-16 10:00:00', '2025-02-16 11:30:00', 2, 2, 'IT104'),
+('Dubai', 'Cairo', '2025-02-17 12:00:00', '2025-02-17 14:30:00', 3, 3, 'IT100'),
+('Berlin', 'Madrid', '2025-02-18 15:00:00', '2025-02-18 17:30:00', 4, 4, 'IT104'),
+('Tokyo', 'Seoul', '2025-02-19 18:00:00', '2025-02-19 19:30:00', 5, 5, 'IT100');
+
+
+-- Afficher le nom et l’adresse des pilotes assurant les vols IT100 et IT104
+
+SELECT 
+    Pilots.Pilote_Nom, 
+    Pilots.Pilote_Adresse,
+    Vols.Vol_Identification,
+    Vols.Ville_Depart,
+    Vols.Ville_Arrive
+
+FROM Pilots
+    INNER JOIN Vols
+    ON Pilots.id = Vols.Pilote_ID
+    WHERE Vols.Vol_Identification = "IT100" or Vols.Vol_Identification = "IT104";
+
+SELECT 
+    Pilots.Pilote_ID, 
+    Pilots.Pilote_Nom 
+FROM Pilots
+    INNER JOIN Vols
+    ON Pilots.Pilote_ID = Vols.Pilote_ID;
+
+SELECT 
+    Pilots.Pilote_ID, 
+    Pilots.Pilote_Nom,
+    Vols.Vol_Identification
+FROM Pilots
+    LEFT JOIN Vols
+    ON Pilots.Pilote_ID = Vols.Pilote_ID
+    WHERE Vols.Vol_Identification IS NOT NULL;
+
+SELECT
+    Pilots.Pilote_Nom, 
+    Avions.Avion_Nom
+FROM Pilots
+INNER JOIN Vols
+    ON Pilots.Pilote_ID = Vols.Pilote_ID
+INNER JOIN Avions
+    ON Avions.Avion_ID = Vols.Avion_ID
+WHERE Avions.Avion_Nom = "AIRBUS";
